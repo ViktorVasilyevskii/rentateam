@@ -1,0 +1,11 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/main_fragment"
+        android:title="@string/text_menu_main_fragment" />
+
+    <item
+        android:id="@+id/favorite"
+        android:title="@string/text_menu_about_program_fragment" />
+
+</menu>
