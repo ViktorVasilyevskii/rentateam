@@ -2,13 +2,11 @@ package com.vasilyevskii.rentteamtesttask.adapter
 
 import android.content.Intent
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.squareup.picasso.Picasso
 import com.vasilyevskii.rentteamtesttask.databinding.UserItemAdapterBinding
-import com.vasilyevskii.rentteamtesttask.fragments.ActivityCardUser
+import com.vasilyevskii.rentteamtesttask.screen.ActivityCardUser
 import com.vasilyevskii.rentteamtesttask.model.UserDTO
 import com.vasilyevskii.rentteamtesttask.utils.Constants
 

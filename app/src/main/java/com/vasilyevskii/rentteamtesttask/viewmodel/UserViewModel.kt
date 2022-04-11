@@ -1,6 +1,6 @@
 package com.vasilyevskii.rentteamtesttask.viewmodel
 
-import android.util.Log
+import android.annotation.SuppressLint
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -9,6 +9,7 @@ import com.vasilyevskii.rentteamtesttask.repository.UserDataBaseRepository
 import com.vasilyevskii.rentteamtesttask.repository.UserRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.MaybeObserver
+import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
@@ -29,9 +30,6 @@ class UserViewModel
     private val _responseError = MutableLiveData<String>()
     val responseError: LiveData<String> = _responseError
 
-    private val _responseUsersDatabase = MutableLiveData<List<UserDTO>>()
-    val responseUsersDatabase: LiveData<List<UserDTO>> = _responseUsersDatabase
-
     init {
         getResponseUsers()
     }
@@ -41,7 +39,7 @@ class UserViewModel
         compositeDisposable.add(
             userRepository.getUsers()
                 .subscribeOn(Schedulers.io())
-                .observeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ result ->
                     _responseUsers.postValue(result.data)
                     updateUserDatabase(result.data)
@@ -52,36 +50,32 @@ class UserViewModel
         )
     }
 
+    @SuppressLint("CheckResult")
     private fun updateUserDatabase(userDTOList: List<UserDTO>) {
-        Thread{
             userDTOList.forEach { user ->
-                Log.d("updateUserDatabase", "updateUserDatabase == $user")
                 userDataBaseRepository.insertUser(user)
+                    .subscribeOn(Schedulers.computation())
+                    .subscribe()
             }
-        Thread.sleep(2000)
-        }.start()
     }
 
     fun getAllUsersDatabase() {
         userDataBaseRepository.getAllUsersList()
             .subscribeOn(Schedulers.io())
-            .observeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
             .subscribe(object: MaybeObserver<List<UserDTO>>{
                 override fun onSubscribe(d: Disposable) {
-                    Log.d("onSubscribe", "onSubscribe == $d")
                 }
 
                 override fun onSuccess(listUser: List<UserDTO>) {
-                    _responseUsersDatabase.postValue(listUser)
-                    Log.d("onSuccess", "onSuccess == $listUser")
+                    _responseUsers.postValue(listUser)
                 }
 
                 override fun onError(e: Throwable) {
-                    Log.d("onError", "onError == ${e.printStackTrace()}")
+                    _responseError.postValue(e.message)
                 }
 
                 override fun onComplete() {
-                    Log.d("onComplete", "onComplete =============== start")
                 }
 
             })

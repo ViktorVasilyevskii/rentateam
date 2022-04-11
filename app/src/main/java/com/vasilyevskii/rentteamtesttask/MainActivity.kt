@@ -4,8 +4,8 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.vasilyevskii.rentteamtesttask.databinding.ActivityMainBinding
-import com.vasilyevskii.rentteamtesttask.fragments.FragmentAboutProgram
-import com.vasilyevskii.rentteamtesttask.fragments.FragmentMain
+import com.vasilyevskii.rentteamtesttask.screen.FragmentAboutProgram
+import com.vasilyevskii.rentteamtesttask.screen.FragmentMain
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

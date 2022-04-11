@@ -16,5 +16,5 @@ interface UserDao {
     fun getAllUsers(): Maybe<List<UserDTO>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertUserDao(userDTO: UserDTO)
+    fun insertUserDao(userDTO: UserDTO): Completable
 }

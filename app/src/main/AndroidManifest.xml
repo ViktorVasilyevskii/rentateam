@@ -23,7 +23,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".fragments.ActivityCardUser"/>
+        <activity android:name=".screen.ActivityCardUser"/>
     </application>
 
 </manifest>

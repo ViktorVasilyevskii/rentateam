@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/fragmentMain"
-        android:name="com.vasilyevskii.rentteamtesttask.fragments.FragmentMain"
+        android:name="com.vasilyevskii.rentteamtesttask.screen.FragmentMain"
         android:label="FragmentMain" >
         <action
             android:id="@+id/action_fragmentMain_to_fragmentAboutProgram"
@@ -15,7 +15,7 @@
 
     <fragment
         android:id="@+id/fragmentAboutProgram"
-        android:name="com.vasilyevskii.rentteamtesttask.fragments.FragmentAboutProgram"
+        android:name="com.vasilyevskii.rentteamtesttask.screen.FragmentAboutProgram"
         android:label="FragmentMain" >
         <action
             android:id="@+id/action_fragmentAboutProgram_to_fragmentMain"
